@@ -1,8 +1,9 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Клюшка";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<canvas onload="startWebGL()" id="chart" width="800" height="800"></canvas>
+
+@section Scripts {
+    <script src="~/js/drawing.js" asp-append-version="true"></script>
+}
