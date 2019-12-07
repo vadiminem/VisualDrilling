@@ -6,5 +6,12 @@
         public double MeasuredDepth { get; set; }
         public double Inclination { get; set; }
         public double Azimuth { get; set; }
+
+        public DrillingPointModel(double measureDepth, double inclination, double azimuth)
+        {
+            MeasuredDepth = measureDepth;
+            Inclination = inclination;
+            Azimuth = azimuth;
+        }
     }
 }
