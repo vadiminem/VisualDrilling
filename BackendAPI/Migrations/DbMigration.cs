@@ -2,6 +2,6 @@
 {
     public class DbMigration
     {
-        CreateDrillingPointsTable migration1;
+        CreateFirstTables migration1;
     }
 }

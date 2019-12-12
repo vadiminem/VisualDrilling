@@ -1,9 +1,14 @@
+using BackendAPI.Interfaces;
+using BackendAPI.Mapping;
+using BackendAPI.Migrations;
+using BackendAPI.Repositories;
 using BackendAPI.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace BackendAPI
 {
@@ -21,6 +26,9 @@ namespace BackendAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddControllers()
+                .AddControllersAsServices();
+
             postgresSettings = Configuration.GetSection("Database").Get<PostgresSettings>();
 
             if (postgresSettings != null && postgresSettings.ConnectionString != null)
@@ -28,7 +36,7 @@ namespace BackendAPI
                 services.AddSingleton(postgresSettings);
             }
 
-            services.AddControllers();
+            services.AddScoped<IDataRepository, DataRepository>();
 
             services.AddCors(options =>
             {
@@ -37,15 +45,18 @@ namespace BackendAPI
                     builder.WithOrigins("https://localhost:44343");
                 });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            applicationLifetime.ApplicationStarted.Register(OnApplicationStarted);
 
             app.UseRouting();
 
@@ -59,6 +70,22 @@ namespace BackendAPI
                     name: "default",
                     pattern: "api/{controller}/{action}");
             });
+        }
+
+        protected void OnApplicationStarted()
+        {
+            try
+            {
+                var migrator = new DbMigrator(postgresSettings);
+                var mapping = new InitializeMapping();
+
+                migrator.StartMigration();
+                mapping.Initialize();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Возникла ошибка при инициализации миграций или маппинга.\nОшибка: {0}", ex.Message);
+            }
         }
     }
 }

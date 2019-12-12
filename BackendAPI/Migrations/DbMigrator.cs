@@ -5,7 +5,7 @@ namespace BackendAPI.Migrations
 {
     public class DbMigrator
     {
-        private PostgresSettings settings;
+        private readonly PostgresSettings settings;
 
         public DbMigrator(PostgresSettings settings)
         {
@@ -16,10 +16,8 @@ namespace BackendAPI.Migrations
         {
             var provider = "Postgres";
             var assembly = typeof(DbMigration).Assembly;
-            using (var migrator = new Migrator(provider, settings.ConnectionString, assembly))
-            {
-                migrator.Migrate();
-            }
+            using var migrator = new Migrator(provider, settings.ConnectionString, assembly);
+            migrator.Migrate();
         }
     }
 }

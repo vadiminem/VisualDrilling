@@ -1,4 +1,5 @@
-﻿using BackendAPI.Models;
+﻿using BackendAPI.Interfaces;
+using BackendAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
@@ -6,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace BackendAPI.Controllers
 {
+    [ApiController]
     public class DataController : ControllerBase
     {
+        public readonly IDataRepository repository;
+
+        public DataController(IDataRepository repository)
+        {
+            this.repository = repository;
+        }
+
         [HttpPost]
         public async Task<IActionResult> InsertAsync()
         {
@@ -35,6 +44,7 @@ namespace BackendAPI.Controllers
                 }
             }
 
+            repository.InsertWellData(well);
             return Ok(well);
         }
     }
