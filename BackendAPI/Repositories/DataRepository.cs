@@ -17,11 +17,12 @@ namespace BackendAPI.Repositories
             this.settings = settings;
         }
 
-        public void GetWellData(int id)
+        public WellModel GetWellData(int id)
         {
             using var connection = new NpgsqlConnection(settings.ConnectionString);
             var well = connection.Get<WellModel>(id);
-            well.Points = connection.GetList<DrillingPointModel>().Where(s => s.Id == id).ToList();
+            well.Points = connection.GetList<DrillingPointModel>().Where(s => s.WellId == id).ToList();
+            return well;
         }
 
         public void InsertWellData(WellModel well)

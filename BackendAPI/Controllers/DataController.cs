@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace BackendAPI.Controllers
 {
-    [ApiController]
     public class DataController : ControllerBase
     {
         public readonly IDataRepository repository;
@@ -16,7 +15,6 @@ namespace BackendAPI.Controllers
         {
             this.repository = repository;
         }
-        [Route("Insert")]
         [HttpPost]
         public async Task<IActionResult> InsertAsync()
         {
@@ -45,6 +43,13 @@ namespace BackendAPI.Controllers
             }
 
             repository.InsertWellData(well);
+            return Ok(well);
+        }
+
+        [HttpGet]
+        public IActionResult Get(int id)
+        {
+            var well = repository.GetWellData(id);
             return Ok(well);
         }
     }
