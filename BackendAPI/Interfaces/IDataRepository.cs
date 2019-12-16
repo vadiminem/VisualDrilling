@@ -4,7 +4,7 @@ namespace BackendAPI.Interfaces
 {
     public interface IDataRepository
     {
-        public void InsertWellData(WellModel well);
-        public void GetWellData(int id);
+        void InsertWellData(WellModel well);
+        void GetWellData(int id);
     }
 }

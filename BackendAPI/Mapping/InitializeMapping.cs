@@ -8,7 +8,8 @@
             DapperExtensions.DapperExtensions
                 .SetMappingAssemblies(new[]
             {
-                typeof(WellMap).Assembly
+                typeof(WellMap).Assembly,
+                typeof(DrillingPointMap).Assembly
             });
         }
     }

@@ -10,7 +10,7 @@ namespace BackendAPI.Repositories
 {
     public class DataRepository : IDataRepository
     {
-        private readonly PostgresSettings settings;
+        public PostgresSettings settings;
 
         public DataRepository(PostgresSettings settings)
         {

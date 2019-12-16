@@ -26,16 +26,15 @@ namespace BackendAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers()
-                .AddControllersAsServices();
+            services.AddControllers();
 
-            postgresSettings = Configuration.GetSection("Database").Get<PostgresSettings>();
+            postgresSettings = Configuration.GetSection("DatabaseSettings:PostgresSettings")
+                .Get<PostgresSettings>();
 
             if (postgresSettings != null && postgresSettings.ConnectionString != null)
             {
                 services.AddSingleton(postgresSettings);
             }
-
             services.AddScoped<IDataRepository, DataRepository>();
 
             services.AddCors(options =>

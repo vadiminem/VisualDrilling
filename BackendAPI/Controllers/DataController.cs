@@ -16,7 +16,7 @@ namespace BackendAPI.Controllers
         {
             this.repository = repository;
         }
-
+        [Route("Insert")]
         [HttpPost]
         public async Task<IActionResult> InsertAsync()
         {
