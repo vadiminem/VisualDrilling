@@ -49,8 +49,15 @@ namespace BackendAPI.Controllers
         [HttpGet]
         public IActionResult Get(int id)
         {
-            var well = repository.GetWellData(id);
-            return Ok(well);
+            if (id > 0)
+            {
+                var well = repository.GetWellData(id);
+                return Ok(well);
+            }
+            else
+            {
+                return StatusCode(400, "Значение id должно быть больше нуля!");
+            }
         }
     }
 }

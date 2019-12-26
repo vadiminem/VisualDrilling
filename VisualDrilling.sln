@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackDrawerLibrary", "TrackDrawerLibrary\TrackDrawerLibrary.csproj", "{AB8DFD57-4306-4FCD-9755-23ED306EC965}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoreholeCalculation", "TrackDrawerLibrary\BoreholeCalculation.csproj", "{AB8DFD57-4306-4FCD-9755-23ED306EC965}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendAPI", "BackendAPI\BackendAPI.csproj", "{ECAD2D5E-91B7-425B-8517-F1435CB44F24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackendAPI", "BackendAPI\BackendAPI.csproj", "{ECAD2D5E-91B7-425B-8517-F1435CB44F24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainMVC", "MainMVC\MainMVC.csproj", "{84518CB8-1D8B-47EE-BEA5-A5A8BC82399B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainMVC", "MainMVC\MainMVC.csproj", "{84518CB8-1D8B-47EE-BEA5-A5A8BC82399B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
